@@ -43,7 +43,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             //await this.ShowLuisResult(context, result);
             if (customerName == null)
             {
-                string message = "Glad to talk to you. Welcome to iBot - your Virtual Property Consultant.";
+                string message = "Glad to talk to you. Welcome to iBot - your Virtual Wasl Property Consultant.";
                 await context.PostAsync(message);
 
                 PromptDialog.Text(
@@ -195,35 +195,35 @@ namespace Microsoft.Bot.Sample.LuisBot
             return new List<Attachment>()
             {
                 GetHeroCard(
-                    "Dubai Properties",
+                    "Wasl Properties",
                     "AED 95000000",
-                    "Dubai Properties Group is a property development and management company based in Dubai, United Arab Emirates. The company is a member of the Dubai Holding group.",
+                    "Wasl Properties Group is a property development and management company based in Dubai, United Arab Emirates.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/1.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "http://www.dp.ae/")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
                 GetHeroCard(
-                     "Dubai Properties",
+                     "Wasl Properties",
                     "AED 25000000",
-                    "Dubai Properties is a leading real estate master developer based in Dubai. Aligned to the leadership’s vision and overall development plans.",
+                    "Wasl Properties is a leading real estate master developer based in Dubai. Aligned to the leadership’s vision and overall development plans.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/2.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "http://www.dp.ae/")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
                 GetHeroCard(
-                     "Dubai Properties",
+                     "Wasl Properties",
                     "AED 670000000",
-                    "Dubai Properties is a major contributor to realizing the vision of Dubai. A dynamic and forward-thinking organistion.",
+                    "Wasl Properties is a major contributor to realizing the vision of Dubai. A dynamic and forward-thinking organistion.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/3.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "http://www.dp.ae/")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
                 GetHeroCard(
-                     "Dubai Properties",
+                     "Wasl Properties",
                     "AED 45000959000",
-                    "Dubai Properties is committed to creating and managing renowned developments that provide distinctive and enriching lifestyles.",
+                    "Wasl Properties is committed to creating and managing renowned developments that provide distinctive and enriching lifestyles.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/4.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "http://www.dp.ae/")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
                   GetHeroCard(
-                     "Dubai Properties",
+                     "Wasl Properties",
                     "AED 45000959000",
-                    "Riverside is part of Marasi Business Bay - an exciting new development by Dubai Properties, in the heart of Business Bay.",
+                    "Riverside is part of Marasi Business Bay - an exciting new development by Wasl Properties, in the heart of Business Bay.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/5.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "http://www.dp.ae/")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
             };
         }
 
