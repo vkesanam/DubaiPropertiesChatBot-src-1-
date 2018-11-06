@@ -12,6 +12,11 @@ namespace Microsoft.Bot.Sample.LuisBot
     [Serializable]
     public class BasicLuisDialog : LuisDialog<object>
     {
+        string customerName;
+        string email;
+        string phone;
+        string complaint;
+
         public BasicLuisDialog() : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["LuisAppId"], 
             ConfigurationManager.AppSettings["LuisAPIKey"], 
@@ -30,7 +35,35 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("Greeting")]
         public async Task GreetingIntent(IDialogContext context, LuisResult result)
         {
-            await this.ShowLuisResult(context, result);
+            //await this.ShowLuisResult(context, result);
+            if (customerName == null)
+            {
+                string message = "Glad to talk to you. Welcome to iBot - your Virtual Property Consultant.";
+                await context.PostAsync(message);
+
+                PromptDialog.Text(
+                context: context,
+                resume: CustomerNameFromGreeting,
+                prompt: "May i know your Name please?",
+                retry: "Sorry, I don't understand that.");
+            }
+            else
+            {
+                string message = "Tell me " + customerName + ". How i can help you?";
+                await context.PostAsync(message);
+                context.Wait(MessageReceived);
+            }
+        }
+        public async Task CustomerNameFromGreeting(IDialogContext context, IAwaitable<string> result)
+        {
+            //string response = await result;
+            //customerName = response;
+
+            //PromptDialog.Text(
+            //   context: context,
+            //   resume: CustomerNameFromCarring,
+            //   prompt: "Thanks " + customerName + ". Are you looking to buy or rent your home/property?",
+            //   retry: "Sorry, I don't understand that.");
         }
 
         [LuisIntent("Cancel")]
