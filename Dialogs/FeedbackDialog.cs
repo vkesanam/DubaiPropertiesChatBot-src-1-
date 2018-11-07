@@ -35,7 +35,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             await context.PostAsync(feedback);
 
-            //context.Wait(MessageReceivedAsync);
+            context.Wait(MessageReceivedAsync);
         }
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
@@ -43,6 +43,12 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             if (userFeedback.Text.Contains("English") || userFeedback.Text.Contains("Arabic"))
             {
+                PromptDialog.Text(
+                    context: context,
+                    resume: CustomerNameFromGreeting,
+                    prompt: "May i know your Name please?",
+                    retry: "Sorry, I don't understand that.");
+
                 //    // create telemetry client to post to Application Insights 
                 //    TelemetryClient telemetry = new TelemetryClient();
 
@@ -74,6 +80,17 @@ namespace Microsoft.Bot.Sample.LuisBot
                 //    context.Done<IMessageActivity>(userFeedback);
                 //}
             }
+        }
+        public async Task CustomerNameFromGreeting(IDialogContext context, IAwaitable<string> result)
+        {
+            //string response = await result;
+            //customerName = response;
+
+            //PromptDialog.Text(
+            //   context: context,
+            //   resume: CustomerNameFromCarring,
+            //   prompt: "Thanks " + customerName + ". Are you looking to buy or rent your home/property?",
+            //   retry: "Sorry, I don't understand that.");
         }
     }
 }
