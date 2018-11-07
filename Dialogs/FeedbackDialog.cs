@@ -35,7 +35,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             await context.PostAsync(feedback);
 
-            context.Wait(MessageReceivedAsync);
+            //context.Wait(MessageReceivedAsync);
         }
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
