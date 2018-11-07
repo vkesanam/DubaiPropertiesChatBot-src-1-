@@ -208,6 +208,7 @@
     <Content Include="botchat.js" />
     <Content Include="Chat2.png" />
     <Content Include="default.htm" />
+    <Content Include="Pro.html" />
     <Content Include="Property.html" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
