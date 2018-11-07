@@ -17,14 +17,28 @@
             height: 100%;
             width: 100%;
         }
+
+        .box1 {
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            color: black;
+            background: #D7E5F0;
+            padding: 20px;
+            font-weight: bold;
+            background-color: white
+        }
     </style>
 </head>
 <body>
-
+    <div id="div1" class="box1">
+        <img src="wasl_logo_0.png" />
+    </div>
     <div id="webchat"></div>
+
     <script>
         const styleOptions = {
-            backgroundColor: 'Ruby',
+            backgroundColor: 'White',
             bubbleBackground: '#222',
             bubbleBorder: 'solid 1px #444',
             bubbleBorderRadius: 20,
@@ -33,6 +47,8 @@
             bubbleFromUserBorderRadius: 20,
             bubbleFromUserTextColor: 'White',
             bubbleTextColor: 'White'
+
+
         };
         window.WebChat.renderWebChat({
             directLine: window.WebChat.createDirectLine({ secret: '4mwpoajwMYs.cwA.oJY.gGIcHy3SkzOv8O85TAymmFw_PptUkZZ72qWltiu18Mw' }),
