@@ -137,6 +137,30 @@ namespace Microsoft.Bot.Sample.LuisBot
         //        context.Done<IMessageActivity>(null);
         //    }
         //}
+        public async Task NameCategory(IDialogContext context,IAwaitable<string> result)
+        {
+            PromptDialog.Choice(context, ResumeCategoryOptions,
+                   new List<string>()
+                   {
+                        "Residencial",
+                        "Commercial"
+                   },
+                   "Are you looking for Residence/Commercial?");
+        }
+        public virtual async Task ResumeCategoryOptions(IDialogContext context, IAwaitable<string> argument)
+        {
+            var selection = await argument;
+            string result = selection;
+
+            if(result== "Residencial" || result== "Commercial")
+            {
+                PromptDialog.Text(
+               context: context,
+               resume: PropertyCity,
+               prompt: "Great. I can show you active homes If you tell me a little bit, Which part of UAE are you looking in?",
+               retry: "Sorry, I don't understand that.");
+            }
+        }
         public async Task CustomerNameFromGreeting(IDialogContext context, IAwaitable<string> result)
         {
             string response = await result;
@@ -173,7 +197,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             PromptDialog.Text(
                 context: context,
-                resume: PropertyBathrooms,
+                resume: PropertyBedrooms,
                 prompt: "That is a great market. There are currently 306 listings on the market in that area. To narrow it down a bit, what price do you require?",
                 retry: "Sorry, I don't understand that.");
         }
@@ -195,7 +219,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             PromptDialog.Text(
                 context: context,
-                resume: PropertyPrice,
+                resume: PropertyBedrooms,
                 prompt: "How many bedrooms are you looking for?",
                 retry: "Sorry, I don't understand that.");
         }
@@ -207,7 +231,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     new List<string>()
                     {
                         "Single Family",
-                        "Condos",
+                        "Studio",
                         "Attached",
                         "Detached"
                     },
