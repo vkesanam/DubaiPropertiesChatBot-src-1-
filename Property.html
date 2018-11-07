@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 <html>
 <head>
     <!--<link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />-->
-    <link href="botchat.css" rel="stylesheet" />
+<link href="botchat.css" rel="stylesheet" />
 </head>
 <body>
     <div id="bot" />
@@ -23,6 +23,23 @@
             userAvatarInitials: 'WC',
             resize: 'detect'
         }, document.getElementById("bot"));
+    </script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="webchat"></div>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <script>
+        window.WebChat.renderWebChat({
+            directLine: window.WebChat.createDirectLine({ secret: '4mwpoajwMYs.cwA.oJY.gGIcHy3SkzOv8O85TAymmFw_PptUkZZ72qWltiu18Mw' }),
+
+            // Passing avatar initials when rendering Web Chat
+            botAvatarInitials: 'BF',
+            userAvatarInitials: 'WC'
+        }, document.getElementById('webchat'));
     </script>
 </body>
 </html>
