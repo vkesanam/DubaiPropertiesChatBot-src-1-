@@ -46,32 +46,31 @@ namespace Microsoft.Bot.Sample.LuisBot
                 string message = "Glad to talk to you. Welcome to iBot - your Virtual Wasl Property Consultant.";
                 await context.PostAsync(message);
 
-    //            var activity = context.Activity as Activity;
-    //            var reply = activity.CreateReply("I have colors in mind, but need your help to choose the best one.");
-    //            reply.Type = ActivityTypes.Message;
-    //            reply.TextFormat = TextFormatTypes.Plain;
+                context.Call(new FeedbackDialog("qnaURL", "userQuestion"), ResumeAfterFeedback);
 
-    //            reply.SuggestedActions = new SuggestedActions()
-    //            {
-    //                Actions = new List<CardAction>()
-    //{
-    //    new CardAction(){ Title = "Blue", Type=ActionTypes.ImBack, Value="Blue" },
-    //    new CardAction(){ Title = "Red", Type=ActionTypes.ImBack, Value="Red" },
-    //    new CardAction(){ Title = "Green", Type=ActionTypes.ImBack, Value="Green" }
-    //}
-    //            };
-
-                PromptDialog.Text(
-                context: context,
-                resume: CustomerNameFromGreeting,
-                prompt: "May i know your Name please?",
-                retry: "Sorry, I don't understand that.");
+                //PromptDialog.Text(
+                //context: context,
+                //resume: CustomerNameFromGreeting,
+                //prompt: "May i know your Name please?",
+                //retry: "Sorry, I don't understand that.");
             }
             else
             {
                 string message = "Tell me " + customerName + ". How i can help you?";
                 await context.PostAsync(message);
                 context.Wait(MessageReceived);
+            }
+        }
+        private async Task ResumeAfterFeedback(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            if (await result != null)
+            {
+                //await MessageReceivedAsync(context, result);
+                 context.Wait(MessageReceived);
+            }
+            else
+            {
+                context.Done<IMessageActivity>(null);
             }
         }
         public async Task CustomerNameFromGreeting(IDialogContext context, IAwaitable<string> result)
