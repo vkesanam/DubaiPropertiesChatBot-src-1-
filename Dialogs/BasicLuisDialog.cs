@@ -116,6 +116,14 @@ namespace Microsoft.Bot.Sample.LuisBot
                 prompt: "May i know your Name please?",
                 retry: "Sorry, I don't understand that.");
             }
+            else if(userFeedback.Text.Contains("Customer Support"))
+            {
+                PromptDialog.Text(
+           context: context,
+           resume: CustomerMobileNumber,
+           prompt: "What is your complaint/suggestion?",
+           retry: "Sorry, I don't understand that.");
+            }
         }
         //private async Task ResumeAfterFeedback(IDialogContext context, IAwaitable<IMessageActivity> result)
         //{
@@ -232,10 +240,10 @@ namespace Microsoft.Bot.Sample.LuisBot
                     {
                         "Single Family",
                         "Studio",
-                        "Attached",
-                        "Detached"
+                        "1 Bed Room",
+                        "3 Bed Room"
                     },
-                    "There are 54 available. What property type are you interested in?");
+                    "There are 54 available. Which type are you interested in?");
         }
         public virtual async Task ResumePropertyOptions(IDialogContext context, IAwaitable<string> argument)
         {
