@@ -112,7 +112,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 PromptDialog.Text(
                 context: context,
-                resume: CustomerNameFromGreeting,
+                resume: NameCategory,
                 prompt: "May i know your Name please?",
                 retry: "Sorry, I don't understand that.");
             }
