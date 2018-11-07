@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
@@ -46,7 +46,24 @@ namespace Microsoft.Bot.Sample.LuisBot
                 string message = "Glad to talk to you. Welcome to iBot - your Virtual Wasl Property Consultant.";
                 await context.PostAsync(message);
 
-                context.Call(new FeedbackDialog("qnaURL", "userQuestion"), ResumeAfterFeedback);
+                //context.Call(new FeedbackDialog("qnaURL", "userQuestion"), ResumeAfterFeedback);
+                var feedback = ((Activity)context.Activity).CreateReply("Let's start by choosing your preferred language?");
+
+                feedback.SuggestedActions = new SuggestedActions()
+                {
+                    Actions = new List<CardAction>()
+                {
+                    //new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
+                    //new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+
+                     new CardAction(){ Title = "English", Type=ActionTypes.PostBack, Value=$"English" },
+                    new CardAction(){ Title = "Arabic", Type=ActionTypes.PostBack, Value=$"Arabic" }
+                }
+                };
+
+                await context.PostAsync(feedback);
+
+                context.Wait(MessageReceivedAsync);
 
                 //PromptDialog.Text(
                 //context: context,
@@ -61,26 +78,65 @@ namespace Microsoft.Bot.Sample.LuisBot
                 context.Wait(MessageReceived);
             }
         }
-        private async Task ResumeAfterFeedback(IDialogContext context, IAwaitable<IMessageActivity> result)
+        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            if (await result != null)
+            var userFeedback = await result;
+
+            if (userFeedback.Text.Contains("English") || userFeedback.Text.Contains("Arabic"))
             {
-                //if (result.Equals("English") || result.Equals("Arabic"))
-                //{
-                //    PromptDialog.Text(
-                //    context: context,
-                //    resume: CustomerNameFromGreeting,
-                //    prompt: "May i know your Name please?",
-                //    retry: "Sorry, I don't understand that.");
-                //}
-                //await MessageReceivedAsync(context, result);
-                context.Wait(MessageReceived);
-            }
-            else
-            {
-                context.Done<IMessageActivity>(null);
+                //context.Call(new FeedbackDialog("qnaURL", "userQuestion"), ResumeAfterFeedback);
+                var feedback = ((Activity)context.Activity).CreateReply("Please choose below a category of interest.");
+
+                feedback.SuggestedActions = new SuggestedActions()
+                {
+                    Actions = new List<CardAction>()
+                {
+                    //new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
+                    //new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+
+                     new CardAction(){ Title = "New Lease Enquiry", Type=ActionTypes.PostBack, Value=$"New Lease Enquiry" },
+                    new CardAction(){ Title = "Customer Support", Type=ActionTypes.PostBack, Value=$"Customer Support" }
+                }
+                };
+
+                await context.PostAsync(feedback);
+
+                context.Wait(ServiceMessageReceivedAsync);
             }
         }
+        public async Task ServiceMessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var userFeedback = await result;
+
+            if (userFeedback.Text.Contains("New Lease Enquiry"))
+            {
+                PromptDialog.Text(
+                context: context,
+                resume: CustomerNameFromGreeting,
+                prompt: "May i know your Name please?",
+                retry: "Sorry, I don't understand that.");
+            }
+        }
+        //private async Task ResumeAfterFeedback(IDialogContext context, IAwaitable<IMessageActivity> result)
+        //{
+        //    if (await result != null)
+        //    {
+        //        //if (result.Equals("English") || result.Equals("Arabic"))
+        //        //{
+        //        //    PromptDialog.Text(
+        //        //    context: context,
+        //        //    resume: CustomerNameFromGreeting,
+        //        //    prompt: "May i know your Name please?",
+        //        //    retry: "Sorry, I don't understand that.");
+        //        //}
+        //        //await MessageReceivedAsync(context, result);
+        //        context.Wait(MessageReceived);
+        //    }
+        //    else
+        //    {
+        //        context.Done<IMessageActivity>(null);
+        //    }
+        //}
         public async Task CustomerNameFromGreeting(IDialogContext context, IAwaitable<string> result)
         {
             string response = await result;
@@ -225,7 +281,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 GetHeroCard(
                      "Wasl Properties",
                     "AED 25000000",
-                    "Wasl Properties is a leading real estate master developer based in Dubai. Aligned to the leadership�s vision and overall development plans.",
+                    "Wasl Properties is a leading real estate master developer based in Dubai. Aligned to the leadership’s vision and overall development plans.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/2.jpg"),
                     new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
                 GetHeroCard(
