@@ -17,10 +17,24 @@
             height: 100%;
             width: 100%;
         }
+
+        .box1 {
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            color: black;
+            background: #D7E5F0;
+            border: .1em solid red;
+            padding: 30px;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
-    <div id="mebot_botIco" style="display: block;height:100%;width:100% background-image: url(&quot;https://dubaipropertieschatbot.azurewebsites.net/Chat2.png&quot;); border-radius: 25px; position: fixed;  background-size: contain; visibility: visible;"></div>
+    <div id="div1" class="box1">
+        Div 1.
+    </div>
     <div id="webchat"></div>
 
     <script>
@@ -34,7 +48,8 @@
             bubbleFromUserBorderRadius: 20,
             bubbleFromUserTextColor: 'White',
             bubbleTextColor: 'White'
-
+            
+        
         };
         window.WebChat.renderWebChat({
             directLine: window.WebChat.createDirectLine({ secret: '4mwpoajwMYs.cwA.oJY.gGIcHy3SkzOv8O85TAymmFw_PptUkZZ72qWltiu18Mw' }),
