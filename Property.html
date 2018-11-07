@@ -1,16 +1,43 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Web Chat: Customizing thru style options</title>
+    <script type="text/javascript" src="https://cdn.botframework.com/botframework-webchat/preview/botchat.js"></script>
+    <style>
+        html, body {
+            height: 100%
+        }
 
-<!DOCTYPE html>
-<html>
+        body {
+            margin: 0
+        }
+
+        #webchat,
+        #webchat > * {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
 <body>
+
     <div id="webchat"></div>
-    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <script>
+        const styleOptions = {
+            backgroundColor: 'Ruby',
+            bubbleBackground: '#222',
+            bubbleBorder: 'solid 1px #444',
+            bubbleBorderRadius: 20,
+            bubbleFromUserBackground: '#222',
+            bubbleFromUserBorder: 'solid 1px #444',
+            bubbleFromUserBorderRadius: 20,
+            bubbleFromUserTextColor: 'White',
+            bubbleTextColor: 'White'
+        };
         window.WebChat.renderWebChat({
             directLine: window.WebChat.createDirectLine({ secret: '4mwpoajwMYs.cwA.oJY.gGIcHy3SkzOv8O85TAymmFw_PptUkZZ72qWltiu18Mw' }),
-
-            // Passing avatar initials when rendering Web Chat
-            botAvatarInitials: 'BF',
+            styleOptions,
+            botAvatarInitials: '👤',
             userAvatarInitials: 'WC'
         }, document.getElementById('webchat'));
     </script>
