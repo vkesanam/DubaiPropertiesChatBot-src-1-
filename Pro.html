@@ -20,11 +20,11 @@
     </style>
 </head>
 <body>
- 
+
     <div id="webchat"></div>
     <script>
         const styleOptions = {
-            backgroundColor: 'Ruby',
+            backgroundColor: 'Black',
             bubbleBackground: '#222',
             bubbleBorder: 'solid 1px #444',
             bubbleBorderRadius: 20,
@@ -34,6 +34,11 @@
             bubbleFromUserTextColor: 'White',
             bubbleTextColor: 'White',
             microphoneButtonColorOnDictate: '#F33',
+
+            sendBoxButtonColor: '#999',
+            sendBoxButtonColorOnDisabled: '#CCC',
+            sendBoxButtonColorOnFocus: '#333',
+            sendBoxButtonColorOnHover: '#333'
         };
         window.WebChat.renderWebChat({
             directLine: window.WebChat.createDirectLine({ secret: '4mwpoajwMYs.cwA.oJY.gGIcHy3SkzOv8O85TAymmFw_PptUkZZ72qWltiu18Mw' }),
