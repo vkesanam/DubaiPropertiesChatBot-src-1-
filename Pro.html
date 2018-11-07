@@ -20,10 +20,11 @@
     </style>
 </head>
 <body>
+
     <div id="webchat"></div>
     <script>
         const styleOptions = {
-            backgroundColor: 'Black',
+            backgroundColor: 'White',
             bubbleBackground: '#222',
             bubbleBorder: 'solid 1px #444',
             bubbleBorderRadius: 20,
@@ -35,7 +36,9 @@
         };
         window.WebChat.renderWebChat({
             directLine: window.WebChat.createDirectLine({ secret: '4mwpoajwMYs.cwA.oJY.gGIcHy3SkzOv8O85TAymmFw_PptUkZZ72qWltiu18Mw' }),
-            styleOptions
+            styleOptions,
+            botAvatarInitials: 'BF',
+            userAvatarInitials: 'WC'
         }, document.getElementById('webchat'));
     </script>
 </body>
