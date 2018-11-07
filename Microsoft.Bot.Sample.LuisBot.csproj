@@ -211,6 +211,7 @@
     <Content Include="Pro.html" />
     <Content Include="Property.html" />
     <Content Include="Global.asax" />
+    <Content Include="wasl_logo_0.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
