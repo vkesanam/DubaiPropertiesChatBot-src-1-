@@ -65,8 +65,16 @@ namespace Microsoft.Bot.Sample.LuisBot
         {
             if (await result != null)
             {
+                if (result.Equals("English") || result.Equals("Arabic"))
+                {
+                    PromptDialog.Text(
+                    context: context,
+                    resume: CustomerNameFromGreeting,
+                    prompt: "May i know your Name please?",
+                    retry: "Sorry, I don't understand that.");
+                }
                 //await MessageReceivedAsync(context, result);
-                 context.Wait(MessageReceived);
+                //context.Wait(MessageReceived);
             }
             else
             {

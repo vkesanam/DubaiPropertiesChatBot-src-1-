@@ -19,14 +19,17 @@ namespace Microsoft.Bot.Sample.LuisBot
         }
         public async Task StartAsync(IDialogContext context)
         {
-            var feedback = ((Activity)context.Activity).CreateReply("Did you find what you need?");
+            var feedback = ((Activity)context.Activity).CreateReply("Let's start by choosing your preferred language?");
 
             feedback.SuggestedActions = new SuggestedActions()
             {
                 Actions = new List<CardAction>()
                 {
-                    new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
-                    new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+                    //new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
+                    //new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+
+                     new CardAction(){ Title = "English", Type=ActionTypes.PostBack, Value=$"English" },
+                    new CardAction(){ Title = "Arabic", Type=ActionTypes.PostBack, Value=$"Arabic" }
                 }
             };
 
@@ -38,7 +41,7 @@ namespace Microsoft.Bot.Sample.LuisBot
         {
             var userFeedback = await result;
 
-            if (userFeedback.Text.Contains("yes-positive-feedback") || userFeedback.Text.Contains("no-negative-feedback"))
+            if (userFeedback.Text.Contains("English") || userFeedback.Text.Contains("Arabic"))
             {
                 //    // create telemetry client to post to Application Insights 
                 //    TelemetryClient telemetry = new TelemetryClient();
