@@ -357,7 +357,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             var selection = await argument;
             //string result = selection;
 
-            string message = "Great there are 25  " + selection + " homes/properties that meet your needs. You can swipe to see each home/property.";
+            string message = "Great there are 25  " + selection.Text + " homes/properties that meet your needs. You can swipe to see each home/property.";
             await context.PostAsync(message);
 
             var reply = context.MakeMessage();
@@ -368,17 +368,35 @@ namespace Microsoft.Bot.Sample.LuisBot
             await context.PostAsync(reply);
 
             // context.Wait(this.MessageReceived);
-            PromptDialog.Confirm(
-                 context: context,
-                 resume: CustomerLeadCreation,
-                 prompt: "Would you like to get updates of new listings like these?",
-                 retry: "Sorry, I don't understand that.");
+            //PromptDialog.Confirm(
+            //     context: context,
+            //     resume: CustomerLeadCreation,
+            //     prompt: "Would you like to get updates of new listings like these?",
+            //     retry: "Sorry, I don't understand that.");
+
+            var feedback = ((Activity)context.Activity).CreateReply("Would you like to get updates of new listings like these?");
+
+            feedback.SuggestedActions = new SuggestedActions()
+            {
+                Actions = new List<CardAction>()
+                {
+                    //new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
+                    //new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+
+                     new CardAction(){ Title = "Yes", Type=ActionTypes.PostBack, Value=$"Yes" },
+                    new CardAction(){ Title = "No", Type=ActionTypes.PostBack, Value=$"No" }
+                }
+            };
+
+            await context.PostAsync(feedback);
+
+            context.Wait(CustomerLeadCreation);
 
         }
-        public async Task CustomerLeadCreation(IDialogContext context, IAwaitable<bool> result)
+        public async Task CustomerLeadCreation(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var answer = await result;
-            if (answer)
+            if (answer.Text.Contains("Yes"))
             {
                 PromptDialog.Text(
                context: context,
@@ -399,12 +417,31 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             await context.PostAsync("Thank you for your interest. Our property consultant will get back to you shortly.");
 
-            PromptDialog.Confirm(
-                 context: context,
-                 resume: AnythingElseHandler,
-                 prompt: "Is there anything else that I could help?",
-                 retry: "Sorry, I don't understand that.");
+            //PromptDialog.Confirm(
+            //     context: context,
+            //     resume: AnythingElseHandler,
+            //     prompt: "Is there anything else that I could help?",
+            //     retry: "Sorry, I don't understand that.");
             //CRMConnection.CreateLeadReg(customerName, email);
+
+            var feedback = ((Activity)context.Activity).CreateReply("Is there anything else that I could help?");
+
+            feedback.SuggestedActions = new SuggestedActions()
+            {
+                Actions = new List<CardAction>()
+                {
+                    //new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
+                    //new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+
+                     new CardAction(){ Title = "Yes", Type=ActionTypes.PostBack, Value=$"Yes" },
+                    new CardAction(){ Title = "No", Type=ActionTypes.PostBack, Value=$"No" }
+                }
+            };
+
+            await context.PostAsync(feedback);
+
+            context.Wait(AnythingElseHandler);
+
 
         }
         private static IList<Attachment> GetCardsAttachments()
@@ -514,17 +551,35 @@ namespace Microsoft.Bot.Sample.LuisBot
                                     {Environment.NewLine}Phone Number: {phone},
                                     {Environment.NewLine}Email: {email}");
 
-            PromptDialog.Confirm(
-            context: context,
-            resume: AnythingElseHandler,
-            prompt: "Is there anything else that I could help?",
-            retry: "Sorry, I don't understand that.");
+            //PromptDialog.Confirm(
+            //context: context,
+            //resume: AnythingElseHandler,
+            //prompt: "Is there anything else that I could help?",
+            //retry: "Sorry, I don't understand that.");
             //CRMConnection.CreateCase(complaint, customerName, phone, email);
+
+            var feedback = ((Activity)context.Activity).CreateReply("Is there anything else that I could help?");
+
+            feedback.SuggestedActions = new SuggestedActions()
+            {
+                Actions = new List<CardAction>()
+                {
+                    //new CardAction(){ Title = "👍", Type=ActionTypes.PostBack, Value=$"yes-positive-feedback" },
+                    //new CardAction(){ Title = "👎", Type=ActionTypes.PostBack, Value=$"no-negative-feedback" }
+
+                     new CardAction(){ Title = "Yes", Type=ActionTypes.PostBack, Value=$"Yes" },
+                    new CardAction(){ Title = "No", Type=ActionTypes.PostBack, Value=$"No" }
+                }
+            };
+
+            await context.PostAsync(feedback);
+
+            context.Wait(AnythingElseHandler);
         }
-        public async Task AnythingElseHandler(IDialogContext context, IAwaitable<bool> argument)
+        public async Task AnythingElseHandler(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var answer = await argument;
-            if (answer)
+            if (answer.Text.Contains("Yes"))
             {
                 await GeneralGreeting(context, null);
             }
