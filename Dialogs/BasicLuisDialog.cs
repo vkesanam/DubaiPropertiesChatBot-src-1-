@@ -172,8 +172,8 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 PromptDialog.Text(
            context: context,
-           resume: CustomerMobileNumber,
-           prompt: "What is your complaint/suggestion?",
+           resume: Customer,
+           prompt: "May i know your name please?",
            retry: "Sorry, I don't understand that.");
             }
         }
@@ -513,9 +513,20 @@ namespace Microsoft.Bot.Sample.LuisBot
         {
             PromptDialog.Text(
             context: context,
-            resume: CustomerMobileNumber,
-            prompt: "What is your complaint/suggestion?",
+            resume: Customer,
+            prompt: "May i know your name please?",
             retry: "Sorry, I don't understand that.");
+        }
+        public async Task Customer(IDialogContext context, IAwaitable<string> result)
+        {
+            string response = await result;
+            customerName = response;
+
+            PromptDialog.Text(
+                context: context,
+                resume: CustomerMobileNumber,
+                prompt: "What is your complaint/suggestion? ",
+                retry: "Sorry, I don't understand that.");
         }
         public async Task CustomerMobileNumber(IDialogContext context, IAwaitable<string> result)
         {
