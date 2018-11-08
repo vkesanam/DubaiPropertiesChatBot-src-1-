@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Bot.Sample.LuisBot
 {
@@ -30,9 +31,35 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task NoneIntent(IDialogContext context, LuisResult result)
         {
             //await this.ShowLuisResult(context, result);
-            string message = "I'm afraid I cannot help you with that. Please try again with different keywords.";
+            string message = "I'm sorry, would you like to speak with a live agent?";
             await context.PostAsync(message);
-            context.Wait(MessageReceived);
+            context.Wait<IMessageActivity>(AfterEscalationConfirmation);
+        }
+
+        // escalate, if appropriate:
+        public async Task AfterEscalationConfirmation(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        {
+            var option = await argument;
+            if (option.Text.ToLower().StartsWith("y"))
+            {
+                // Confirm the transfer:
+                await context.PostAsync("I'm transferring you to an agent now...");
+
+                // Transfer to the BotEscalation skill
+                IMessageActivity transferMsg = context.MakeMessage();
+                JObject transferChannelData = JObject.Parse(@"{'type':'transfer','skill':'BotEscalation'}");
+                transferMsg.ChannelData = transferChannelData;
+                transferMsg.Text = "";
+                transferMsg.Type = ActivityTypes.Message;
+                await context.PostAsync(transferMsg);
+            }
+            else
+            {
+                // if user does not want to escalate, close the dialog.
+                await context.PostAsync("How else can I help you?");
+                context.Done<bool>(true);
+            }
+
         }
 
         // Go to https://luis.ai and create a new intent, then train/publish your luis app.
