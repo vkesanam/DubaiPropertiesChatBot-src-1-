@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 
+using Microsoft.Bot.Builder.ConnectorEx;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Bot.Sample.LuisBot
@@ -15,10 +17,12 @@ namespace Microsoft.Bot.Sample.LuisBot
     [Serializable]
     public class BasicLuisDialog : LuisDialog<object>
     {
-        string customerName;
-        string email;
-        string phone;
-        string complaint;
+        public string customerName;
+        public string email;
+        public string phone;
+        public string complaint;
+
+       
 
         public BasicLuisDialog() : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["LuisAppId"], 
@@ -31,12 +35,17 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("None")]
         public async Task NoneIntent(IDialogContext context, LuisResult result)
         {
+            
+
             //await this.ShowLuisResult(context, result);
             string message = "I'm sorry, would you like to speak with a live agent?";
             await context.PostAsync(message);
-            context.Wait<IMessageActivity>(AfterEscalationConfirmation);
-        }
 
+            context.Wait<IMessageActivity>(AfterEscalationConfirmation);
+          
+        }
+     
+       
         // escalate, if appropriate:
         public async Task AfterEscalationConfirmation(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
