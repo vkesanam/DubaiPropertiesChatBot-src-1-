@@ -25,6 +25,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             ConfigurationManager.AppSettings["LuisAPIKey"], 
             domain: ConfigurationManager.AppSettings["LuisAPIHostName"])))
         {
+
         }
 
         [LuisIntent("None")]
@@ -52,6 +53,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 transferMsg.Text = "";
                 transferMsg.Type = ActivityTypes.Message;
                 await context.PostAsync(transferMsg);
+                context.Wait(MessageReceived);
             }
             else
             {
