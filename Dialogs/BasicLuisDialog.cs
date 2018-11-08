@@ -132,7 +132,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
                 context.Wait(ServiceMessageReceivedAsync);
             }
-            if(!(userFeedback.Text.Contains("English")) || !(userFeedback.Text.Contains("Arabic")))
+            else 
             {
                 context.Wait<IMessageActivity>(AfterEscalationConfirmationGreeting);
             }
