@@ -535,7 +535,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             PromptDialog.Text(
                context: context,
-               resume: CustomerEmail,
+               resume: FinalResultHandler,
                prompt: "May I have your Email ID? ",
                retry: "Sorry, I don't understand that.");
         }
