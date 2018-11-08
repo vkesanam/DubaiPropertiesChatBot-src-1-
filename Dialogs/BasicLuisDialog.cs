@@ -469,17 +469,17 @@ namespace Microsoft.Bot.Sample.LuisBot
             await context.PostAsync(message);
             context.Wait(MessageReceived);
         }
-        [LuisIntent("Cancel")]
-        public async Task CancelIntent(IDialogContext context, LuisResult result)
-        {
-            await this.ShowLuisResult(context, result);
-        }
+        //[LuisIntent("Cancel")]
+        //public async Task CancelIntent(IDialogContext context, LuisResult result)
+        //{
+        //    await this.ShowLuisResult(context, result);
+        //}
 
-        [LuisIntent("Help")]
-        public async Task HelpIntent(IDialogContext context, LuisResult result)
-        {
-            await this.ShowLuisResult(context, result);
-        }
+        //[LuisIntent("Help")]
+        //public async Task HelpIntent(IDialogContext context, LuisResult result)
+        //{
+        //    await this.ShowLuisResult(context, result);
+        //}
 
         private async Task ShowLuisResult(IDialogContext context, LuisResult result) 
         {
