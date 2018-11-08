@@ -134,23 +134,19 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else 
             {
-                context.Wait<IMessageActivity>(AfterEscalationConfirmationGreeting);
+                await context.PostAsync("I'm transferring you to an agent now...");
+
+                // Transfer to the BotEscalation skill
+                IMessageActivity transferMsg = context.MakeMessage();
+                JObject transferChannelData = JObject.Parse(@"{'type':'transfer','skill':'BotEscalation'}");
+                transferMsg.ChannelData = transferChannelData;
+                transferMsg.Text = "";
+                transferMsg.Type = ActivityTypes.Message;
+                await context.PostAsync(transferMsg);
             }
         }
 
-        public async Task AfterEscalationConfirmationGreeting(IDialogContext context, IAwaitable<IMessageActivity> argument)
-        {
-            // Confirm the transfer:
-            await context.PostAsync("I'm transferring you to an agent now...");
-
-            // Transfer to the BotEscalation skill
-            IMessageActivity transferMsg = context.MakeMessage();
-            JObject transferChannelData = JObject.Parse(@"{'type':'transfer','skill':'BotEscalation'}");
-            transferMsg.ChannelData = transferChannelData;
-            transferMsg.Text = "";
-            transferMsg.Type = ActivityTypes.Message;
-            await context.PostAsync(transferMsg);
-        }
+  
             public async Task ServiceMessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var userFeedback = await result;
