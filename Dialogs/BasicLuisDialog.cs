@@ -599,15 +599,28 @@ namespace Microsoft.Bot.Sample.LuisBot
                 string message = $"Thanks for using I Bot. Hope you have a great day!";
                 await context.PostAsync(message);
 
-                //var survey = context.MakeMessage();
+                var survey = context.MakeMessage();
 
-                //var attachment = GetSurveyCard();
-                //survey.Attachments.Add(attachment);
+                var attachment = GetSurveyCard();
+                survey.Attachments.Add(attachment);
 
-                //await context.PostAsync(survey);
+                await context.PostAsync(survey);
 
                 context.Done<string>("conversation ended.");
             }
+        }
+        private static Microsoft.Bot.Connector.Attachment GetSurveyCard()
+        {
+            var heroCard = new HeroCard
+            {
+                Title = "",
+                Subtitle = "",
+                Text = "Kindly complete the Survey.",
+                //Images = new List<CardImage> { new CardImage("http://idhabot.azurewebsites.net/DMankhool.png") },
+                Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Click to complete the Survey", value: "https://forms.office.com/Pages/ResponsePage.aspx?id=FF895RyCQ0izz-qdJqraOMtXBiX0l-FJuvjdTD8-2vlUQ1BRV1FXQVA0NTZUQTJNVk1FMFIwQUhGVC4u") }
+            };
+
+            return heroCard.ToAttachment();
         }
         public virtual async Task GeneralGreeting(IDialogContext context, IAwaitable<string> argument)
         {
