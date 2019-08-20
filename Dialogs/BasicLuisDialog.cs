@@ -449,35 +449,35 @@ namespace Microsoft.Bot.Sample.LuisBot
             return new List<Attachment>()
             {
                 GetHeroCard(
-                    "Wasl Properties",
+                    "DREC",
                     "AED 950000",
-                    "Wasl Properties Group is a property development and management company based in Dubai, United Arab Emirates.",
+                    "Dubai Real Estate Centre is a property development and management company based in Dubai, United Arab Emirates.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/1.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://drec.ae/")),
                 GetHeroCard(
-                     "Wasl Properties",
+                     "DREC",
                     "AED 250000",
-                    "Wasl Properties is a leading real estate master developer based in Dubai. Aligned to the leadership’s vision and overall development plans.",
+                    "Dubai Real Estate Centre is a leading real estate master developer based in Dubai. Aligned to the leadership’s vision and overall development plans.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/2.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://drec.ae/")),
                 GetHeroCard(
-                     "Wasl Properties",
+                     "DREC",
                     "AED 670000",
-                    "Wasl Properties is a major contributor to realizing the vision of Dubai. A dynamic and forward-thinking organistion.",
+                    "Dubai Real Estate Centre is a major contributor to realizing the vision of Dubai. A dynamic and forward-thinking organistion.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/3.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://drec.ae/")),
                 GetHeroCard(
-                     "Wasl Properties",
+                     "DREC",
                     "AED 450009",
-                    "Wasl Properties is committed to creating and managing renowned developments that provide distinctive and enriching lifestyles.",
+                    "Dubai Real Estate Centre is committed to creating and managing renowned developments that provide distinctive and enriching lifestyles.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/4.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://drec.ae/")),
                   GetHeroCard(
-                     "Wasl Properties",
+                     "DREC",
                     "AED 450009",
                     "Riverside is part of Marasi Business Bay - an exciting new development by Wasl Properties, in the heart of Business Bay.",
                     new CardImage(url: "https://dubaipropertieschatbot.azurewebsites.net/5.jpg"),
-                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://www.waslproperties.com/en")),
+                    new CardAction(ActionTypes.OpenUrl, "Read more", value: "https://drec.ae/")),
             };
         }
 
