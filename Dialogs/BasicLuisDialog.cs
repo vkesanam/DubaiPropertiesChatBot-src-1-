@@ -81,7 +81,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             //await this.ShowLuisResult(context, result);
             if (customerName == null)
             {
-                string message = "Glad to talk to you. Welcome to iBot - your Virtual Wasl Property Consultant.";
+                string message = "Glad to talk to you. Welcome to iBot - your Virtual DREC Property Consultant.";
                 await context.PostAsync(message);
 
                 //context.Call(new FeedbackDialog("qnaURL", "userQuestion"), ResumeAfterFeedback);
