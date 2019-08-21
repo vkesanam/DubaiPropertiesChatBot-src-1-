@@ -408,6 +408,15 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 string message = $"Thanks for using I Bot. Hope you have a great day!";
                 await context.PostAsync(message);
+
+                var survey = context.MakeMessage();
+
+                var attachment = GetSurveyCard();
+                survey.Attachments.Add(attachment);
+
+                await context.PostAsync(survey);
+
+                context.Done<string>("conversation ended.");
             }
         }
         public async Task CustomerLead(IDialogContext context, IAwaitable<string> result)
