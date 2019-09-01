@@ -210,6 +210,10 @@
     <Content Include="default.htm" />
     <Content Include="DrecLogo.png" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="NewChatBot\minwebchat.html" />
+    <Content Include="NewChatBot\robot.png" />
+    <Content Include="NewChatBot\webchat.html" />
+    <Content Include="NewChatBot\welcome_logo.png" />
     <Content Include="P.html" />
     <Content Include="Pro.html" />
     <Content Include="Property.html" />
